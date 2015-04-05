@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "jscs": "~1.12.0"
+  }
+}
