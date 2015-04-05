@@ -1,4 +1,5 @@
 import bintray.Keys._
+import com.typesafe.sbt.SbtGit._
 
 sbtPlugin := true
 
@@ -10,9 +11,11 @@ git.baseVersion := "0.2"
 
 scalaVersion := "2.10.4"
 
+resolvers += "Typesafe Releases Repository" at "http://repo.typesafe.com/typesafe/releases/"
+
 addSbtPlugin("com.typesafe.sbt" % "sbt-js-engine" % "1.0.2")
 
-enablePlugins(GitVersioning, GitBranchPrompt)
+versionWithGit
 
 publishMavenStyle := false
 
@@ -24,5 +27,4 @@ repository in bintray := "sbt-plugins"
 
 bintrayOrganization in bintray := Some("hindsightsoftware")
 
-git.useGitDescribe := true
 
