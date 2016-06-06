@@ -26,16 +26,23 @@ object SbtJscs extends AutoPlugin {
   import com.typesafe.sbt.jse.JsEngineImport.JsEngineKeys._
   import com.typesafe.sbt.web.SbtWeb.autoImport._
 
-  val settings = Seq(
-    includeFilter := "*.js" | "*.jsx",
+  val commonSettings = Seq(
+    includeFilter := "*.js" | "*.jsx"
+  )
+
+  val settings = commonSettings ++ Seq(
     sourceDirectory in jscs := (sourceDirectory in Assets).value,
     unmanagedSourceDirectories := Seq(sourceDirectory.value)
+  )
+
+  val testSettings = commonSettings ++ Seq(
+    sourceDirectory in jscs := (sourceDirectory in TestAssets).value
   )
 
   override def projectSettings = inTask(jscs)(
     SbtJsTask.jsTaskSpecificUnscopedSettings ++
       inConfig(Assets)(settings) ++
-      inConfig(TestAssets)(settings) ++
+      inConfig(TestAssets)(testSettings) ++
       Seq(
         moduleName := "jscs",
         shellFile := getClass.getClassLoader.getResource("jscs-shell.js"),
