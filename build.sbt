@@ -7,7 +7,7 @@ name := "sbt-jscs"
 
 organization := "com.hindsightsoftware.sbt"
 
-git.baseVersion := "1.0"
+git.baseVersion := "1.1"
 
 scalaVersion := "2.10.4"
 
